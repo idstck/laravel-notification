@@ -12,10 +12,15 @@
 */
 
 use App\Notifications\NewVisitor;
+use App\Notifications\TelegramNotif;
 
 Route::get('/', function () {
     $user = Auth::user();
+
     $user->notify(new NewVisitor("A new user has visited."));
+
+    \Notification::send($user, new TelegramNotif());
+
     return view('welcome');
 });
 
