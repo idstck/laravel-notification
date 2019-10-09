@@ -11,7 +11,11 @@
 |
 */
 
+use App\Notifications\NewVisitor;
+
 Route::get('/', function () {
+    $user = Auth::user();
+    $user->notify(new NewVisitor("A new user has visited."));
     return view('welcome');
 });
 
